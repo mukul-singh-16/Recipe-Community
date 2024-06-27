@@ -46,12 +46,12 @@ To run this project locally, follow these steps:
     GOOGLE_CLIENT_ID=YOUR_ACTUAL_GOOGLE_CLIENT_ID
     GOOGLE_CLIENT_SECRET=YOUR_ACTUAL_GOOGLE_CLIENT_SECRET
     ```
-5. Run the server and client:
+5. Run the backend and frontend:
     ```bash
-    cd server
+    cd backend
     npm start
-    cd ../client
-    npm start
+    cd ../frontend
+    npm run dev
     ```
 
 ## Usage
@@ -73,7 +73,5 @@ Once the project is up and running, you can:
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-## License
 
-This project is licensed under the MIT License.
 
