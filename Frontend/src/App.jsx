@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchuserinfo = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {

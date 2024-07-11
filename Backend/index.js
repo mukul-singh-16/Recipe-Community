@@ -54,7 +54,7 @@ const UserRoutes = require("./Routes/UserRoutes");
 app.use(BlogRoutes);
 app.use(NormalRoutes);
 app.use(RecipeRoutes);
-app.use("/auth", UserRoutes);
+app.use(UserRoutes);
 
 // seedDB();
 app.listen(port, () => {

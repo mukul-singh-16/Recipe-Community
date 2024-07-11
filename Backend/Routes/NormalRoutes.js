@@ -12,4 +12,7 @@ router.get('/contact',(req,res)=>{
     res.send("contact page khulega")
 })
 
+
+
+
 module.exports= router;
