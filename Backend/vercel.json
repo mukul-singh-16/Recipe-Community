@@ -5,13 +5,17 @@
         "src": "*.js",
         "use": "@vercel/node"
       }
-      
     ],
     "routes": [
       {
         "src": "/(.*)",
         "dest": "/"
       }
-    ]
+    ],
+    "functions": {
+      "*.js": {
+        "maxDuration": 60
+      }
+    }
   }
   
