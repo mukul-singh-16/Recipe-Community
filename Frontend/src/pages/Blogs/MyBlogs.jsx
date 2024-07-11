@@ -20,14 +20,14 @@ export const MyBlogs = () => {
 
   async function getAllBlogs() {
     try {
-      const res = await axios.get("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/blog/", {
+      const res = await axios.get("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/blog", {
         withCredentials: true,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         }
         });
-      // {console.log(res.data);}
+      {console.log(res.data);}
       setblogs(res.data);
     } catch (e) {
       console.log("unable to fetch all blogs data");
