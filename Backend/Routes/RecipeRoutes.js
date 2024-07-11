@@ -7,7 +7,7 @@ const User = require("../Models/user");
 router.get("/recipe", async (req, res) => {
   try {
     const recipe = await MyRecipe.find();
-    console.log("sare recipes aa jynge");
+    // console.log("sare recipes aa jynge");
     res.status(200).json(recipe);
   } catch (e) {
     res.status(400).json({ msg: "Something Went Wrong!!!" });

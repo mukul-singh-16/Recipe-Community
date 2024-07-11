@@ -7,7 +7,7 @@ const User = require("../Models/user")
 router.get("/blog", async (req, res) => {
   try {
     const blog = await MyBlog.find();
-    console.log("sare blogs aa jynge");
+    // console.log("sare blogs aa jynge");
     res.status(200).json(blog);
   } catch (e) {
     res.status(400).json({ msg: "Something Went Wrong!!!" });
