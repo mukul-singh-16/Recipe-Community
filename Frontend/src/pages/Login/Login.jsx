@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   const googlelogin = async () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/auth/google", "_self");
   };
 
   const togglePasswordVisibility = () => {
@@ -54,7 +54,7 @@ const Login = () => {
     console.log("Role:", role);
     try {
 
-      const res = await axios.post("http://localhost:5000/auth/register", {
+      const res = await axios.post("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/auth/register", {
         email,
         password,
         username,
@@ -67,7 +67,7 @@ const Login = () => {
         }
       })
       console.log(res.data);
-      window.location.href="http://localhost:5173/";
+      window.location.href="https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app";
       // navigate("winblogs")
 
     }
@@ -84,7 +84,7 @@ const Login = () => {
     const { username, password } = formData;
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", {
+      const res = await axios.post("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/auth/login", {
         username,
         password
       },{
@@ -95,7 +95,7 @@ const Login = () => {
         }
       });
       console.log(res.data);
-      window.location.href="http://localhost:5173/";
+      window.location.href="https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/";
     } catch (error) {
       console.error("Error:", error.response.data.error);
       console.error("Login failed.");

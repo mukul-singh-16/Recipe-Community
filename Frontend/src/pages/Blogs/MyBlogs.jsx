@@ -20,7 +20,7 @@ export const MyBlogs = () => {
 
   async function getAllBlogs() {
     try {
-      const res = await axios.get("http://localhost:5000/blog/", {
+      const res = await axios.get("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/blog/", {
         withCredentials: true,
         headers: {
           Accept: "application/json",
