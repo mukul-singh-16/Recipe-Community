@@ -14,7 +14,7 @@ const ShowRecipe = () => {
   const [recipe, setRecipe] = useState([]);
 
   async function recipeDataFetcher() {
-    const res = await axios.get(`http://localhost:5000/recipe/${params.id}`);
+    const res = await axios.get(`https://recipe-community-server.vercel.app/recipe/${params.id}`);
     console.log(res.data);
     setRecipe(res.data);
   }

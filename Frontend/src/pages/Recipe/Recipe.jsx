@@ -19,7 +19,7 @@ const Recipe = () => {
 
   async function getAllRecipes() {
     try {
-      const res = await axios.get("http://localhost:5000/recipe");
+      const res = await axios.get("https://recipe-community-server.vercel.app/recipe");
       setrecipe(res.data);
     } catch (e) {
       console.log("bhai recipe fetch nhi ho pa rhi url se");
@@ -38,7 +38,6 @@ const Recipe = () => {
 
   return (
     <>
-      {/* <MyNav /> */}
 
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <div
@@ -79,6 +78,10 @@ const Recipe = () => {
       >
         <SearchForm />
       </div>
+
+      {recipes.length === 0 && (
+        <h2 style={{textAlign:"center"}}>Loading...</h2>
+      )}
 
       <div className="container" style={flexbox}>
         {recipes.map((recipe) => {

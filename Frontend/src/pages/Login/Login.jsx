@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   const googlelogin = async () => {
-    window.open("http://localhost:5000/google", "_self");
+    window.open("https://recipe-community-server.vercel.app/google", "_self");
   };
 
   const togglePasswordVisibility = () => {
@@ -54,7 +54,7 @@ const Login = () => {
     console.log("Role:", role);
     try {
 
-      const res = await axios.post("http://localhost:5000/register", {
+      const res = await axios.post("https://recipe-community-server.vercel.app/register", {
         email,
         password,
         username,
@@ -67,7 +67,7 @@ const Login = () => {
         }
       })
       console.log(res.data);
-      window.location.href="http://localhost:5000";
+      window.location.href="https://recipe-community-server.vercel.app";
       // navigate("winblogs")
 
     }
@@ -84,7 +84,7 @@ const Login = () => {
     const { username, password } = formData;
 
     try {
-      const res = await axios.post("http://localhost:5000/login", {
+      const res = await axios.post("https://recipe-community-server.vercel.app/login", {
         username,
         password
       },{
@@ -95,7 +95,7 @@ const Login = () => {
         }
       });
       console.log(res.data);
-      window.location.href="http://localhost:5000/";
+      window.location.href="https://recipe-community-server.vercel.app/";
     } catch (error) {
       console.error("Error:", error.response.data.error);
       console.error("Login failed.");

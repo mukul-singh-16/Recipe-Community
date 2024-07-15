@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const MyBlogs = () => {
-  const [blogs, setblogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
   function Redirect() {
@@ -20,15 +20,10 @@ export const MyBlogs = () => {
 
   async function getAllBlogs() {
     try {
-      const res = await axios.get("http://localhost:5000/blog", {
-        withCredentials: true,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        }
-        });
-      {console.log(res.data);}
-      setblogs(res.data);
+      console.log("hit on all blogs");
+      const res = await axios.get("https://recipe-community-server.vercel.app/blog");
+      console.log(res.data);
+      setBlogs(res.data);
     } catch (e) {
       console.log("unable to fetch all blogs data");
     }
@@ -46,7 +41,6 @@ export const MyBlogs = () => {
 
   return (
     <>
-      {/* <MyNav /> */}
       <div
         style={{
           width: "100%",
@@ -76,8 +70,13 @@ export const MyBlogs = () => {
       </div>
 
       <div style={{ textAlign: "center", marginTop: "30px" }}>
-        <h1>Explore's The Blogs </h1>
+        <h1>Explore's The Blogs</h1>
       </div>
+      
+      {blogs.length === 0 && (
+        <h2 style={{textAlign:"center"}}>Loading...</h2>
+      )}
+
       <div
         style={{
           textAlign: "center",
@@ -88,11 +87,11 @@ export const MyBlogs = () => {
       >
         <SearchForm />
       </div>
-
+      
       <div className="container" style={flexbox}>
-        {blogs.map((blog) => {
-          return <BCard key={blog._id} blog={blog} />;
-        })}
+        {blogs.map((blog) => (
+          <BCard key={blog._id} blog={blog} />
+        ))}
       </div>
 
       <Footer />

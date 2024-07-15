@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchuserinfo = () => {
-      fetch("http://localhost:5000/login/success", {
+      fetch("https://recipe-community-server.vercel.app/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -51,7 +51,6 @@ const App = () => {
     <>
       <Router>
         <MyNav user={user} />
-        {/* <Navv /> */}
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/recipe" element={<Recipe />} />
