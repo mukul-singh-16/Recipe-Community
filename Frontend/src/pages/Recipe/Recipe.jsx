@@ -19,7 +19,7 @@ const Recipe = () => {
 
   async function getAllRecipes() {
     try {
-      const res = await axios.get("https://recipe-community-server-jxfz3bhrh-mukul-singh-16s-projects.vercel.app/recipe/");
+      const res = await axios.get("http://localhost:5000/recipe");
       setrecipe(res.data);
     } catch (e) {
       console.log("bhai recipe fetch nhi ho pa rhi url se");

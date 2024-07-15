@@ -33,7 +33,6 @@ app.use(passport.session());
 
 app.use(
   cors({
-    // origin: ["http://localhost:5173"],
     origin: '*',
     methods: "GET,POST,PUT,DELETE",
     credentials: true, // Include credentials (cookies, authorization headers) in CORS requests
