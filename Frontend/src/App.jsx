@@ -12,10 +12,8 @@ import AddRecipe from "../src/Components/Form/AddRecipe";
 import AddBlog from "../src/Components/Form/AddBlog";
 import Profile from "./pages/Profile/Profile";
 import MyNav from "./Components/Navbar/MyNav";
-// import Navv from "./Components/Navbar/Navv";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Wrongurl from "./Components/Wrongurl/Wrongurl";
 const App = () => {
   // const user=true;
