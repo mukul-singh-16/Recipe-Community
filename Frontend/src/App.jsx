@@ -50,23 +50,23 @@ const App = () => {
       <Router>
         <MyNav user={user} />
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/recipe" element={<Recipe />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="https://recipe-community-frontend.vercel.app/" element={<Home/>} />
+          <Route path="https://recipe-community-frontend.vercel.app/recipe" element={<Recipe />} />
+          <Route path="https://recipe-community-frontend.vercel.app/login" element={<Login />} />
           <Route
-            path="/showRecipe/:id"
+            path="https://recipe-community-frontend.vercel.app/showRecipe/:id"
             element={user ? <ShowRecipe /> : <Login />}
           />
-          <Route path="/blogs" element={<MyBlogs />} />
+          <Route path="https://recipe-community-frontend.vercel.app/blogs" element={<MyBlogs />} />
           <Route
-            path="/showBlogs/:id"
+            path="https://recipe-community-frontend.vercel.app/showBlogs/:id"
             element={user ? <ShowBlogs /> : <Login />}
           />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/addrecipe" element={user ?<AddRecipe /> :<Login/>} />
-          <Route path="/addblog" element={user ? <AddBlog /> : <Login/> } />
-          <Route path="profile/:id" element={<Profile  user = {user}/>} />
-          <Route path="*" element={<Wrongurl/>} />
+          <Route path="https://recipe-community-frontend.vercel.app/contact" element={<Contact />} />
+          <Route path="https://recipe-community-frontend.vercel.app/addrecipe" element={user ?<AddRecipe /> :<Login/>} />
+          <Route path="https://recipe-community-frontend.vercel.app/addblog" element={user ? <AddBlog /> : <Login/> } />
+          <Route path="https://recipe-community-frontend.vercel.app/profile/:id" element={<Profile  user = {user}/>} />
+          <Route path="https://recipe-community-frontend.vercel.app/*" element={<Wrongurl/>} />
         </Routes>
       </Router>
     </>
