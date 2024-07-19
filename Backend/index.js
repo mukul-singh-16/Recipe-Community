@@ -2,67 +2,50 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const seedDB = require("./seed");
 const cookieSession = require("cookie-session");
 const dotenv = require("dotenv").config();
 const passport = require("passport");
-const passportsetup = require("./passoprt");
+const passportSetup = require("./passoprt"); // Corrected import statement
+const seedDB = require("./seed");
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Connect to MongoDB
 const mongourl = process.env.MONGO_URL;
-// const mongourl = "mongodb://localhost:27017/recipeeee";
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
-mongoose
-  .connect(mongourl)
-  .then(() => console.log("Connection Open!"))
-  .catch((err) => console.log(err));
+mongoose.connect(mongourl)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB connection error:", err));
 
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["helloji"],
-    maxAge: 24 * 60 * 60 * 100,
-  })
-);
+// Configure cookie-session for session management
+app.use(cookieSession({
+  name: "session",
+  keys: ["bestsecrete"], // Use environment variable for security
+  maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
+}));
 
+// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// Configure CORS
 app.use(cors({
   origin: 'https://recipe-community-frontend.vercel.app',
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'], // Remove 'Access-Control-Allow-Credentials' from here
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // Allow cookies and credentials in cross-origin requests
 }));
 
-
-
-
+// Example middleware for debugging or additional processing
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://recipe-community-frontend.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200); // Respond to OPTIONS requests
-  } else {
-    next(); // Continue to the next middleware
-  }
-});
-
-
-
-app.use((req, res, next) => {
-  // console.log("req.user");
-  // console.log(req.user);
+  console.log("Request user:", req.user); // Log the current user (if using passport)
   next();
 });
 
-//all routes
+// Import and use routes
 const BlogRoutes = require("./Routes/BlogRoutes");
 const NormalRoutes = require("./Routes/NormalRoutes");
 const RecipeRoutes = require("./Routes/RecipeRoutes");
@@ -73,7 +56,7 @@ app.use(NormalRoutes);
 app.use(RecipeRoutes);
 app.use(UserRoutes);
 
-// seedDB();
+// Start server
 app.listen(port, () => {
-  console.log("conected to port 5000");
+  console.log(`Server is running on port ${port}`);
 });
