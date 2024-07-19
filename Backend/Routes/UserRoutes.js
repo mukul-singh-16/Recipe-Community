@@ -240,7 +240,7 @@ router.get("/login/success", (req, res) => {
     // Handle case where req.user is not set (optional)
     res.status(401).json({
       success: false,
-      message: "Unauthorized",
+      message: "user not logined",
     });
   }
 });
