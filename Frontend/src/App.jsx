@@ -18,32 +18,32 @@ import Wrongurl from "./Components/Wrongurl/Wrongurl";
 const App = () => {
   // const user=true;
 
-  const [user, setuser] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchuserinfo = () => {
-      fetch("https://recipe-community-server.vercel.app/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) 
-            return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          setuser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
+    const fetchuserinfo = async () => {
+      try {
+        const response = await fetch("https://recipe-community-server.vercel.app/login/success", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         });
+    
+        if (!response.ok) {
+          throw new Error("Failed to fetch user information");
+        }
+    
+        const data = await response.json();
+        console.log(data); // Log the response data for debugging
+        setUser(data.user); // Assuming data structure { success: true, message: "successfull", user: {...} }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
     };
-
+    
     fetchuserinfo();
   }, []);
   return (

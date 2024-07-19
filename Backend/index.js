@@ -31,12 +31,29 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use(cors({
   origin: 'https://recipe-community-frontend.vercel.app',
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Remove 'Access-Control-Allow-Credentials' from here
   credentials: true // Allow cookies and credentials in cross-origin requests
 }));
+
+
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://recipe-community-frontend.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200); // Respond to OPTIONS requests
+  } else {
+    next(); // Continue to the next middleware
+  }
+});
+
 
 
 app.use((req, res, next) => {
