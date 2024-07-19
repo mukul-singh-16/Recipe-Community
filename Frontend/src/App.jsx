@@ -21,29 +21,30 @@ const App = () => {
   const [user, setuser] = useState(null);
 
   useEffect(() => {
-    const fetchuserinfo = () => {
-      fetch("https://recipe-community-server.vercel.app/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          setuser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch("https://recipe-community-server.vercel.app/login/success", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Do not include Access-Control-Allow-Credentials here; it's a response header
+          },
         });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user information");
+        }
+
+        const data = await response.json();
+        setuser(data.user); // Assuming data structure { success: true, message: "successfull", user: {...} }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
     };
 
-    fetchuserinfo();
+    fetchUserInfo();
   }, []);
   return (
     <>

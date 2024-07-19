@@ -236,6 +236,12 @@ router.get("/login/success", (req, res) => {
       message: "successfull",
       user: req.user,
     });
+  } else {
+    // Handle case where req.user is not set (optional)
+    res.status(401).json({
+      success: false,
+      message: "Unauthorized",
+    });
   }
 });
 
