@@ -227,7 +227,7 @@ router.get("/profile/:id", async (req, res) => {
 
 
 
-const CLIENT_URL = "http://localhost:5173/";
+const CLIENT_URL = "https://recipe-community-frontend.vercel.app/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
@@ -240,7 +240,7 @@ router.get("/login/success", (req, res) => {
 });
 
 router.get("/login/failed", (req, res) => {
-  res.status(401).json({
+  res.status(404).json({
     success: false,
     message: "failure",
   });
