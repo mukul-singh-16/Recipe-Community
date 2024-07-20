@@ -7,6 +7,7 @@ const dotenv = require("dotenv").config();
 const passport = require("passport");
 const passportSetup = require("./passoprt"); // Corrected import statement
 const seedDB = require("./seed");
+var session = require('express-session')
 
 // Middleware
 app.use(express.json());
@@ -21,11 +22,19 @@ mongoose.connect(mongourl)
   .catch(err => console.error("MongoDB connection error:", err));
 
 // Configure cookie-session for session management
-app.use(cookieSession({
-  name: "session",
-  keys: ["bestsecrete"], // Use environment variable for security
-  maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
-}));
+// app.use(cookieSession({
+//   name: "session",
+//   keys: ["bestsecrete"], // Use environment variable for security
+//   maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
+// }));
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 // Initialize passport
 app.use(passport.initialize());
