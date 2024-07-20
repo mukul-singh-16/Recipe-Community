@@ -2,16 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const dotenv = require("dotenv").config();
 const passport = require("passport");
 const passportSetup = require("./passport"); // Corrected import statement
 const seedDB = require("./seed");
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 const mongourl = process.env.MONGO_URL;
@@ -21,17 +18,44 @@ mongoose.connect(mongourl)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB connection error:", err));
 
-// Configure express-session for session management
+
+
+const mongooseConnection = mongoose.connection;
+
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
 app.use(session({
-  secret: process.env.SESSION_SECRET || "bestsecrete", // Use environment variable for security
+  secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: mongourl }),
+  saveUninitialized: true,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
-    secure: process.env.NODE_ENV === 'production' // Set secure cookies in production
-  }
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 1
+  },
+  store: new MongoStore({ 
+    mongoUrl: mongourl, 
+    mongooseConnection,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }), // Use MongoDB to store sessions
 }));
+
+
+
+// Configure cookie-session for session management
+// app.use(cookieSession({
+//   name: "session",
+//   keys: ["bestsecrete"], // Use environment variable for security
+//   maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
+// }));
+
+
 
 // Initialize passport
 app.use(passport.initialize());
