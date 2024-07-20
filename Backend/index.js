@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const dotenv = require("dotenv").config();
 const passport = require("passport");
-const passportSetup = require("./passoprt"); // Corrected import statement
+const passportSetup = require("./passport"); // Corrected import statement
 const seedDB = require("./seed");
-var session = require('express-session')
 
 // Middleware
 app.use(express.json());
@@ -21,20 +21,17 @@ mongoose.connect(mongourl)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB connection error:", err));
 
-// Configure cookie-session for session management
-// app.use(cookieSession({
-//   name: "session",
-//   keys: ["bestsecrete"], // Use environment variable for security
-//   maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
-// }));
-
-app.set('trust proxy', 1) // trust first proxy
+// Configure express-session for session management
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET || "bestsecrete", // Use environment variable for security
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: mongourl }),
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
+    secure: process.env.NODE_ENV === 'production' // Set secure cookies in production
+  }
+}));
 
 // Initialize passport
 app.use(passport.initialize());
