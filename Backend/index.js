@@ -48,12 +48,7 @@ app.use(session({
 
 
 
-// Configure cookie-session for session management
-// app.use(cookieSession({
-//   name: "session",
-//   keys: ["bestsecrete"], // Use environment variable for security
-//   maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
-// }));
+ 
 
 
 
@@ -66,12 +61,12 @@ app.use(cors({
   origin: 'https://recipe-community-frontend.vercel.app',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true // Allow cookies and credentials in cross-origin requests
+  credentials: true 
 }));
 
 // Example middleware for debugging or additional processing
 app.use((req, res, next) => {
-  console.log("Request user:", req.user); // Log the current user (if using passport)
+  console.log("Request user:", req.user); 
   next();
 });
 
