@@ -24,18 +24,17 @@ const App = () => {
 
   useEffect(() => {
     const fetchuserinfo = async () => {
-
-      
-      try{  
         const response = await axios(import.meta.env.VITE_SERVER_URL+"/login/success", {
           withCredentials: true, // Send cookies with the request
         });
 
         if(response.data.user)
+        {
           setUser(response.data.user); 
-        // console.log(response.data);
-      } catch (error) {
-        console.error("Fetching protected data failed", error);
+        console.log(response.data);
+        }
+      else{
+        console.log("Fetching protected data failed");
       }  
     };
     

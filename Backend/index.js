@@ -1,66 +1,80 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const passport = require("passport");
+const passportSetup = require("./passport"); // Corrected import statement
+const seedDB = require("./seed");
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const passportSetup = require("./passport"); // Ensure passport strategies are correctly configured
-const app = express();
+// const MongoStore = require('connect-mongo');
 
-// Environment variables
+
+// Connect to MongoDB
 const mongourl = process.env.MONGO_URL;
 const port = process.env.PORT || 5000;
 
-// Connect to MongoDB
-mongoose.connect(mongourl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(mongourl)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB connection error:", err));
+
+
+
+const mongooseConnection = mongoose.connection;
+
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Configuration
-const allowedOrigins = [
-  'https://recipe-community-frontend.vercel.app',
-  'http://localhost:5173'
-];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // Allow credentials (cookies) to be sent
-};
 
-app.use(cors(corsOptions));
-
-// Session Configuration
 app.use(session({
-  secret: 'your-secret-key', // Replace with your secret
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: mongourl }), // Persist sessions in MongoDB
   cookie: {
-    secure: false, // Set to true if using https in production
+    secure: true, // Set to true if using https
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   }
 }));
 
-// Initialize Passport
+
+
+ 
+
+
+
+// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Debugging middleware to check user session
+
+
+const allowedOrigins = [
+  'https://recipe-community-frontend.vercel.app',
+  'http://localhost:5173'
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200); // End the preflight request
+  }
+
+  next();
+});
+
+
+// Example middleware for debugging or additional processing
 app.use((req, res, next) => {
   console.log("Request user:", req.user); 
   next();
