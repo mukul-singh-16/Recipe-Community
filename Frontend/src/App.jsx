@@ -34,6 +34,7 @@ const App = () => {
         });
     
         if (!response.ok) {
+          console.log("user is not logedin yet")
           return;
         }
         else{

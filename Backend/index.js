@@ -56,13 +56,27 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure CORS
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true 
-}));
+const allowedOrigins = [
+  'https://recipe-community-frontend.vercel.app',
+  'http://localhost:5173'
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200); // End the preflight request
+  }
+
+  next();
+});
+
 
 // Example middleware for debugging or additional processing
 app.use((req, res, next) => {

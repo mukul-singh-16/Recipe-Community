@@ -238,6 +238,8 @@ router.get("/login/success", (req, res) => {
       user: req.user,
     });
   }
+  else 
+  redirect("/login/failed");
 });
 
 router.get("/login/failed", (req, res) => {
