@@ -16,6 +16,7 @@ import MyNav from "./Components/Navbar/MyNav";
 import { useEffect, useState } from "react";
 import Wrongurl from "./Components/Wrongurl/Wrongurl";
 import Message from "./Components/Message/Message";
+import axios from "axios";
 const App = () => {
   // const user=true;
 
@@ -23,26 +24,19 @@ const App = () => {
 
   useEffect(() => {
     const fetchuserinfo = async () => {
+
       
-        const response = await fetch(import.meta.env.VITE_SERVER_URL+"/login/success", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+      try{  
+        const response = await axios(import.meta.env.VITE_SERVER_URL+"/login/success", {
+          withCredentials: true, // Send cookies with the request
         });
-    
-        if (!response.ok) {
-          console.log("user is not logedin yet")
-          return;
-        }
-        else{
-        const data = await response.json();
-        // console.log(data); // Log the response data for debugging
-        setUser(data.user); // Assuming data structure { success: true, message: "successfull", user: {...} }
-      
-        }
+
+        if(response.data.user)
+          setUser(response.data.user); 
+        // console.log(response.data);
+      } catch (error) {
+        console.error("Fetching protected data failed", error);
+      }  
     };
     
     fetchuserinfo();

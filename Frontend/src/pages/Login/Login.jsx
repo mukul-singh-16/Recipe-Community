@@ -96,15 +96,14 @@ const Login = () => {
         username,
         password
       },{
-        withCredentials: true,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        }
+        withCredentials: true
       });
+
       console.log(res.data);
-      console.log(import.meta.env.VITE_SERVER_URL)
+      // console.log(import.meta.env.VITE_SERVER_URL)
       window.location.href=import.meta.env.VITE_CLIENT_URL;
+      // localStorage.setItem('user', JSON.stringify(res.data));
+      
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error.message } });
 

@@ -231,15 +231,11 @@ router.get("/profile/:id", async (req, res) => {
 // const CLIENT_URL = "https://recipe-community-frontend.vercel.app/";
 
 router.get("/login/success", (req, res) => {
-  if (req.user) {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      user: req.user,
-    });
+  if (req.isAuthenticated()) {
+    res.json({ message: 'You are authenticated', user: req.user });
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
   }
-  else 
-  redirect("/login/failed");
 });
 
 router.get("/login/failed", (req, res) => {
