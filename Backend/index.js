@@ -58,7 +58,7 @@ app.use(passport.session());
 
 // Configure CORS
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: '*',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true 
