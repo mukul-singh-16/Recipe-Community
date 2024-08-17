@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   const googlelogin = async () => {
-    window.open("https://recipe-community-server.vercel.app/google", "_self");
+    window.open(import.meta.env.VITE_SERVER_URL+"/google", "_self");
   };
 
   const togglePasswordVisibility = () => {
@@ -54,7 +54,7 @@ const Login = () => {
     console.log("Role:", role);
     try {
 
-      const res = await axios.post("https://recipe-community-server.vercel.app/register", {
+      const res = await axios.post(import.meta.env.VITE_SERVER_URL+"/register", {
         email,
         password,
         username,
@@ -67,7 +67,7 @@ const Login = () => {
         }
       })
       console.log(res.data);
-      window.location.href="https://recipe-community-server.vercel.app";
+      window.location.href=import.meta.env.VITE_CLIENT_URL;
       // navigate("winblogs")
 
     }
@@ -84,7 +84,7 @@ const Login = () => {
     const { username, password } = formData;
 
     try {
-      const res = await axios.post("https://recipe-community-server.vercel.app/login", {
+      const res = await axios.post(import.meta.env.VITE_SERVER_URL+"/login", {
         username,
         password
       },{
@@ -95,9 +95,14 @@ const Login = () => {
         }
       });
       console.log(res.data);
-      window.location.href="https://recipe-community-server.vercel.app/";
+      console.log(import.meta.env.VITE_SERVER_URL)
+      window.location.href=import.meta.env.VITE_CLIENT_URL;
     } catch (error) {
-      console.error("Error:", error.response.data.error);
+      navigate('/messege', { state: { message: "Login failed: " + error.message } });
+
+
+      console.error("Error:", error);
+
       console.error("Login failed.");
     }
   };

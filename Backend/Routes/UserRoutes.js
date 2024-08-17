@@ -158,8 +158,9 @@ router.get("/follow/decline/:id", async (req, res) => {
 
 
 
-router.post('/login', passport.authenticate('local', { 
-  failureRedirect: 'http://localhost:5173/login',
+
+
+router.post('/login', passport.authenticate('local',{ 
 }), 
 (req, res) => {
   try
@@ -227,7 +228,7 @@ router.get("/profile/:id", async (req, res) => {
 
 
 
-const CLIENT_URL = "https://recipe-community-frontend.vercel.app/";
+// const CLIENT_URL = "https://recipe-community-frontend.vercel.app/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
@@ -236,17 +237,11 @@ router.get("/login/success", (req, res) => {
       message: "successfull",
       user: req.user,
     });
-  } else {
-    // Handle case where req.user is not set (optional)
-    res.status(401).json({
-      success: false,
-      message: "user not logined",
-    });
   }
 });
 
 router.get("/login/failed", (req, res) => {
-  res.status(404).json({
+   return res.status(401).json({
     success: false,
     message: "failure",
   });
@@ -254,7 +249,7 @@ router.get("/login/failed", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect(CLIENT_URL);
+  res.redirect(process.env.CLIENT_URL);
 });
 
 
@@ -262,32 +257,14 @@ router.get("/google", passport.authenticate("google", { scope: ["email","profile
 
 router.get(
   "/google/callback",
+
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL,
+    successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
   })
 );
 
 
 
-
-// router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
-// router.get(
-//   "/github/callback",
-//   passport.authenticate("github", {
-//     successRedirect: CLIENT_URL,
-//     failureRedirect: "/login/failed",
-//   })
-// );
-
-// router.get("/facebook", passport.authenticate("facebook", { scope: ["profile"] }));
-
-// router.get(
-//   "/facebook/callback",
-//   passport.authenticate("facebook", {
-//     successRedirect: CLIENT_URL,
-//     failureRedirect: "/login/failed",
-//   })
-// );
 
 module.exports = router;

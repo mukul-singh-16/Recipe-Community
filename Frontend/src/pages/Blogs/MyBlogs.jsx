@@ -21,7 +21,7 @@ export const MyBlogs = () => {
   async function getAllBlogs() {
     try {
       console.log("hit on all blogs");
-      const res = await axios.get("https://recipe-community-server.vercel.app/blog");
+      const res = await axios.get(import.meta.env.VITE_SERVER_URL+"/blog");
       console.log(res.data);
       setBlogs(res.data);
     } catch (e) {

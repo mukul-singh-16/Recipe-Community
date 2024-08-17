@@ -58,7 +58,7 @@ app.use(passport.session());
 
 // Configure CORS
 app.use(cors({
-  origin: 'https://recipe-community-frontend.vercel.app',
+  origin: process.env.CLIENT_URL,
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true 

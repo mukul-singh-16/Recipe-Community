@@ -71,7 +71,7 @@ function Profile(props) {
   useEffect(() => {
     const fetchUserDetail = async () => {
       try {
-        const response = await axios.get(`https://recipe-community-server.vercel.app/profile/${id}`, {
+        const response = await axios.get(import.meta.env.VITE_SERVER_URL+`/profile/${id}`, {
           withCredentials: true,
           headers: {
             Accept: "application/json",
@@ -115,7 +115,7 @@ function Profile(props) {
     try {
       if (buttoncontent==="Following") {
         // Unfollow user
-        await axios.post(`https://recipe-community-server.vercel.app/unfollow/${id}`,currentuser, {
+        await axios.post(import.meta.env.VITE_SERVER_URL+`/unfollow/${id}`,currentuser, {
           withCredentials: true,
           headers: {
             Accept: "application/json",
@@ -126,7 +126,7 @@ function Profile(props) {
       } 
       else if (buttoncontent==="Follow"){
         // Follow user
-        await axios.post(`https://recipe-community-server.vercel.app/follow/${id}`,currentuser,{
+        await axios.post(import.meta.env.VITE_SERVER_URL+`/follow/${id}`,currentuser,{
           withCredentials: true,
           headers: {
             Accept: "application/json",

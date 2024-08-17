@@ -16,7 +16,7 @@ export const ShowBlogs = () => {
     const fetchData = async () => {
       try {
         if (!id) return;
-        const res = await axios.get(`https://recipe-community-server.vercel.app/blog/${id}`);
+        const res = await axios.get(import.meta.env.VITE_SERVER_URL+`/blog/${id}`);
         setData(res.data);
       } catch (error) {
         console.log(error);

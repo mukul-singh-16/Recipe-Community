@@ -16,7 +16,7 @@ const Review = (props) => {
       if (comment.trim() == "") return;
 
       try {
-        await axios.post(`http://localhost:5000/blog/${id}/comment`, {
+        await axios.post(import.meta.env.VITE_SERVER_URL+`blog/${id}/comment`, {
           comment,
         },{
           withCredentials: true,

@@ -23,7 +23,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://recipe-community-server.vercel.app/google/callback",
+      callbackURL: process.env.SERVER_URL+"/google/callback",
     },
     async (req, accessToken, refreshToken, profile, done) => {
       // console.log("Google profile:", profile); // Log profile object

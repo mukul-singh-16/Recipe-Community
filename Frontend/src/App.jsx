@@ -15,6 +15,7 @@ import MyNav from "./Components/Navbar/MyNav";
 
 import { useEffect, useState } from "react";
 import Wrongurl from "./Components/Wrongurl/Wrongurl";
+import Message from "./Components/Message/Message";
 const App = () => {
   // const user=true;
 
@@ -22,8 +23,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchuserinfo = async () => {
-      try {
-        const response = await fetch("https://recipe-community-server.vercel.app/login/success", {
+      
+        const response = await fetch(import.meta.env.VITE_SERVER_URL+"/login/success", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -33,15 +34,14 @@ const App = () => {
         });
     
         if (!response.ok) {
-          throw new Error("Failed to fetch user information");
+          return;
         }
-    
+        else{
         const data = await response.json();
-        console.log(data); // Log the response data for debugging
+        // console.log(data); // Log the response data for debugging
         setUser(data.user); // Assuming data structure { success: true, message: "successfull", user: {...} }
-      } catch (error) {
-        console.error("Error fetching user information:", error);
-      }
+      
+        }
     };
     
     fetchuserinfo();
@@ -67,6 +67,7 @@ const App = () => {
           <Route path="/addrecipe" element={user ?<AddRecipe /> :<Login/>} />
           <Route path="/addblog" element={user ? <AddBlog /> : <Login/> } />
           <Route path="profile/:id" element={<Profile  user = {user}/>} />
+          <Route path="/messege" element={<Message/>} />
           <Route path="*" element={<Wrongurl/>} />
         </Routes>
       </Router>

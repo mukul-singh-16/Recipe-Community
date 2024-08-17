@@ -22,7 +22,7 @@ function MyNav(props) {
 
   const requestAcceptHAndler = async (user)=>{
     try{
-    await axios.get(`http://localhost:5000/auth/follow/accept/${user._id}`,{
+    await axios.get(import.meta.env.VITE_SERVER_URL+`/auth/follow/accept/${user._id}`,{
       withCredentials: true,
       headers: {
         Accept: 'application/json',
@@ -40,7 +40,7 @@ function MyNav(props) {
 
   const requestdeclineHandler = async(user)=>{
     try{
-        await axios.get(`http://localhost:5000/auth/follow/decline/${user._id}`,{
+        await axios.get(import.meta.env.VITE_SERVER_URL+`/auth/follow/decline/${user._id}`,{
         withCredentials: true,
         headers: {
           Accept: 'application/json',
@@ -61,7 +61,7 @@ function MyNav(props) {
     const fetchRequestedUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/auth/requesteduser",
+          import.meta.env.VITE_SERVER_URL+"/auth/requesteduser",
           {
             withCredentials: true,
             headers: {
@@ -81,7 +81,7 @@ function MyNav(props) {
 
   const logouthandler = () => {
     try {
-      window.open("http://localhost:5000/auth/logout", "_self");
+      window.open(import.meta.env.VITE_SERVER_URL+"/logout", "_self");
     } catch (e) {
       console.log("logout button kam nhi kiya");
       console.log(e);
