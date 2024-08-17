@@ -20,7 +20,7 @@ export const MyBlogs = () => {
 
   async function getAllBlogs() {
     try {
-      console.log("hit on all blogs");
+      console.log(import.meta.env.VITE_SERVER_URL+"/blog");
       const res = await axios.get(import.meta.env.VITE_SERVER_URL+"/blog");
       console.log(res.data);
       setBlogs(res.data);

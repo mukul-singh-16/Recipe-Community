@@ -18,7 +18,15 @@ const Login = () => {
   });
 
   const googlelogin = async () => {
-    window.open(import.meta.env.VITE_SERVER_URL+"/google", "_self");
+    try{
+    const res = axios.get(import.meta.env.VITE_SERVER_URL+"/google")
+    window.location.href=import.meta.env.VITE_CLIENT_URL;
+    }
+    catch(e)
+    {
+        navigate('/messege', { state: { message: "Login failed: " + e.message } }); 
+    }
+      
   };
 
   const togglePasswordVisibility = () => {
