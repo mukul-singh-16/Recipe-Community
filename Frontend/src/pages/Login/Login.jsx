@@ -101,7 +101,8 @@ const Login = () => {
 
       console.log(res.data);
       // console.log(import.meta.env.VITE_SERVER_URL)
-      window.location.href=import.meta.env.VITE_CLIENT_URL;
+      navigate('/')
+      // window.location.href=import.meta.env.VITE_CLIENT_URL;
       // localStorage.setItem('user', JSON.stringify(res.data));
       
     } catch (error) {
