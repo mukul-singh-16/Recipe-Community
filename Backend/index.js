@@ -34,7 +34,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true, // Set to true if using https
+    secure: false, // Set to true if using https
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   }
@@ -57,21 +57,11 @@ const allowedOrigins = [
   'http://localhost:5173'
 ];
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  }
-  
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200); // End the preflight request
-  }
 
-  next();
-});
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true 
+}));
 
 
 // Example middleware for debugging or additional processing
