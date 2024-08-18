@@ -100,6 +100,9 @@ const Login = () => {
       });
 
       console.log(res.data);
+      // console.log(res.data);
+      console.log('Response Headers:', res.headers);
+      // window.location.href = import.meta.env.VITE_CLIENT_URL;
       // console.log(import.meta.env.VITE_SERVER_URL)
       navigate('/')
       // window.location.href=import.meta.env.VITE_CLIENT_URL;
