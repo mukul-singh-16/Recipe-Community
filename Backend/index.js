@@ -37,6 +37,7 @@ app.use(session({
     secure: false, // Set to true if using https
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 1 day
+    sameSite: 'None' // Necessary for cross-site cookies
   }
 }));
 
