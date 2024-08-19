@@ -102,14 +102,14 @@ const Login = () => {
       console.log(res.data);
       // console.log(res.data);
       console.log('Response Headers:', res.headers);
-      // window.location.href = import.meta.env.VITE_CLIENT_URL;
+      // window.location.href = import.meta.env.VITE_CLIENT_UL;
       // console.log(import.meta.env.VITE_SERVER_URL)
       navigate('/')
       // window.location.href=import.meta.env.VITE_CLIENT_URL;
       // localStorage.setItem('user', JSON.stringify(res.data));
       
     } catch (error) {
-      navigate('/messege', { state: { message: "Login failed: " + error.message } });
+      navigate('/messege', { state: { message: "Login failed: " + error } });
 
 
       console.error("Error:", error);
