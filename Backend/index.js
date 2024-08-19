@@ -45,7 +45,7 @@ app.use(
     name: "session",
     keys: ["helloji"],
     maxAge: 24 * 60 * 60 * 100, // 24 hours
-    secure: true, // Set to true for HTTPS on Vercel
+    secure: false, // Set to true for HTTPS on Vercel
     sameSite: "Lax", // Adjust according to your needs
     httpOnly: true,
   })
