@@ -3,10 +3,20 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const cookieSession = require("cookie-session");
 const passport = require("passport");
 const passportSetup = require("./passport"); // Corrected import statement
 const seedDB = require("./seed");
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
+
+
+
+
+
+
+app.use(cookieParser());
 // const MongoStore = require('connect-mongo');
 
 
@@ -23,22 +33,51 @@ mongoose.connect(mongourl)
 const mongooseConnection = mongoose.connection;
 
 
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
 
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: true, // Set to true if using https
-    httpOnly: true,
-    sameSite: 'None' // Necessary for cross-site cookies
-  }
-}));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["helloji"],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+
+
+
+// app.use(session({
+//   secret: 'yourSecretKey',
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: false, // Set to true if using HTTPS in production
+//     sameSite: 'None', // Set to 'Lax' if not cross-origin
+//     httpOnly: true,
+//     maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
+//   }
+// }));
+
+
+// try {
+//   app.use(session({
+//     secret: 'yourSecretKey',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: false, // Set to true if using HTTPS in production
+//       sameSite: 'Lax', // Set to 'None' if cross-origin
+//       httpOnly: true,
+//       maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
+//     }
+//   }));
+// } catch (err) {
+//   console.error('Error setting up session:', err);
+// }
 
 
 
@@ -68,6 +107,13 @@ app.use(cors({
 app.use((req, res, next) => {
   console.log("Request user:", req.user); 
   next();
+});
+
+
+
+app.get('/', (req, res) => {
+  console.log('Session:', req.session);
+  res.send('Hello World!');
 });
 
 // Import and use routes
