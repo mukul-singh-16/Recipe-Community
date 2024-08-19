@@ -155,31 +155,7 @@ passport.use(
 
 
 
-// passport.use(
-//   new GithubStrategy(
-//     {
-//       clientID: GITHUB_CLIENT_ID,
-//       clientSecret: GITHUB_CLIENT_SECRET,
-//       callbackURL: "/auth/github/callback",
-//     },
-//     function (accessToken, refreshToken, profile, done) {
-//       done(null, profile);
-//     }
-//   )
-// );
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: FACEBOOK_APP_ID,
-//       clientSecret: FACEBOOK_APP_SECRET,
-//       callbackURL: "/auth/facebook/callback",
-//     },
-//     function (accessToken, refreshToken, profile, done) {
-//       done(null, profile);
-//     }
-//   )
-// );
 
 passport.serializeUser((user, done) => {
   done(null, user);

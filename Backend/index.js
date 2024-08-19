@@ -5,7 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv").config();
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const passportSetup = require("./passport"); // Corrected import statement
+const passportSetup = require("./passport"); 
 const seedDB = require("./seed");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -44,10 +44,17 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["helloji"],
-    maxAge: 24 * 60 * 60 * 100,
+    maxAge: 24 * 60 * 60 * 100, // 24 hours
+    secure: true, // Set to true for HTTPS on Vercel
+    sameSite: "Lax", // Adjust according to your needs
+    httpOnly: true,
   })
 );
 
+app.use((req, res, next) => {
+  res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+  next();
+});
 
 
 // app.use(session({
