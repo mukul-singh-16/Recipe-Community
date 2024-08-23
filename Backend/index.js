@@ -16,8 +16,9 @@ const cookieParser = require('cookie-parser');
 
 
 
-app.use(cookieParser());
-// const MongoStore = require('connect-mongo');
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // Connect to MongoDB
@@ -30,13 +31,11 @@ mongoose.connect(mongourl)
 
 
 
-const mongooseConnection = mongoose.connection;
+// const mongooseConnection = mongoose.connection;
 
 
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 
 
@@ -44,48 +43,9 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["helloji"],
-    maxAge: 24 * 60 * 60 * 100, // 24 hours
-    secure: false, // Set to true for HTTPS on Vercel
-    sameSite: "Lax", // Adjust according to your needs
-    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 100
   })
 );
-
-// app.use((req, res, next) => {
-//   res.set("Cache-Control", "no-cache, no-store, must-revalidate");
-//   next();
-// });
-
-
-// app.use(session({
-//   secret: 'yourSecretKey',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     secure: false, // Set to true if using HTTPS in production
-//     sameSite: 'None', // Set to 'Lax' if not cross-origin
-//     httpOnly: true,
-//     maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
-//   }
-// }));
-
-
-// try {
-//   app.use(session({
-//     secret: 'yourSecretKey',
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       secure: false, // Set to true if using HTTPS in production
-//       sameSite: 'Lax', // Set to 'None' if cross-origin
-//       httpOnly: true,
-//       maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
-//     }
-//   }));
-// } catch (err) {
-//   console.error('Error setting up session:', err);
-// }
-
 
 
  
@@ -106,8 +66,11 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: allowedOrigins,
+  methods: "GET,POST,PUT,DELETE",
   credentials: true 
 }));
+
+
 
 
 // Example middleware for debugging or additional processing
@@ -118,10 +81,10 @@ app.use((req, res, next) => {
 
 
 
-app.get('/', (req, res) => {
-  console.log('Session:', req.session);
-  res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//   console.log('Session:', req.session);
+//   res.send('Hello World!');
+// });
 
 // Import and use routes
 const BlogRoutes = require("./Routes/BlogRoutes");

@@ -257,16 +257,19 @@ router.get("/logout", (req, res) => {
 });
 
 
+
+
+
 router.get("/google", passport.authenticate("google", { scope: ["email","profile"] }));
 
 router.get(
-  "/google/callback",
-
-  passport.authenticate("google", {
-    // successRedirect: process.env.CLIENT_URL,
-    // failureRedirect: "/login/failed",
-  })
+	"/google/callback",
+	passport.authenticate("google", {
+		successRedirect: process.env.CLIENT_URL,
+		failureRedirect: "/login/failed",
+	})
 );
+
 
 
 

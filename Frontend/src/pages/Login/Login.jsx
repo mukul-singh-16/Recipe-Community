@@ -19,8 +19,8 @@ const Login = () => {
 
   const googlelogin = async () => {
     try{
-    const res = axios.get(import.meta.env.VITE_SERVER_URL+"/google")
-    window.location.href=import.meta.env.VITE_CLIENT_URL;
+      window.open(import.meta.env.VITE_SERVER_URL+"/google","_self")
+    // window.location.href=import.meta.env.VITE_CLIENT_URL;
     }
     catch(e)
     {
@@ -28,6 +28,9 @@ const Login = () => {
     }
       
   };
+
+
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
