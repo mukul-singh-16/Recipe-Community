@@ -50,20 +50,20 @@ mongoose.connect(mongourl)
 
 
 
-// Session configuration with cookie settings
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    // domain: 'recipe-community-frontend.vercel.app', // Set the domain for the cookie
-    // path: '/',
-    // httpOnly: true, // Prevent access from JavaScript
-    // secure: true, // Ensures the cookie is only sent over HTTPS
-    // maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    // sameSite: 'Strict', // CSRF protection
+    domain: 'vercel.app', // Use the top-level domain
+    path: '/',
+    httpOnly: true,
+    secure: true, // Ensure secure flag is set for HTTPS
+    sameSite: 'None', // Allows cross-site cookies
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   }
 }));
+
 
 
 
