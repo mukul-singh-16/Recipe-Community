@@ -71,11 +71,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    domain: 'recipe-community-frontend.vercel.app',
+    // domain: 'recipe-community-frontend.vercel.app',
     path: '/',
     httpOnly: true,
     secure: true, // Cookie only sent over HTTPS
-    sameSite: 'Strict', // or 'Lax' if needed
+    // sameSite: 'Strict', // or 'Lax' if needed
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   }
 }));
