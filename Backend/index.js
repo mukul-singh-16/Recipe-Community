@@ -51,34 +51,21 @@ mongoose.connect(mongourl)
 
 
 // Session configuration with cookie settings
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {
-//     // domain: 'recipe-community-frontend.vercel.app', // Set the domain for the cookie
-//     // path: '/',
-//     // httpOnly: true, // Prevent access from JavaScript
-//     // secure: true, // Ensures the cookie is only sent over HTTPS
-//     // maxAge: 24 * 60 * 60 * 1000, // 24 hours
-//     // sameSite: 'Strict', // CSRF protection
-//   }
-// }));
-
-
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    // domain: 'recipe-community-frontend.vercel.app',
-    path: '/',
-    httpOnly: true,
-    secure: true, // Cookie only sent over HTTPS
-    // sameSite: 'Strict', // or 'Lax' if needed
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    // domain: 'recipe-community-frontend.vercel.app', // Set the domain for the cookie
+    // path: '/',
+    // httpOnly: true, // Prevent access from JavaScript
+    // secure: true, // Ensures the cookie is only sent over HTTPS
+    // maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    // sameSite: 'Strict', // CSRF protection
   }
 }));
+
+
 
 
 
