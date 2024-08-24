@@ -8,11 +8,6 @@ const passport = require("passport");
 const passportSetup = require("./passport"); 
 const seedDB = require("./seed");
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
-
-
-
-
 
 
 
@@ -39,13 +34,36 @@ mongoose.connect(mongourl)
 
 
 
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["helloji"],
-    maxAge: 24 * 60 * 60 * 100
-  })
-);
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   maxAge: 24 * 60 * 60 * 100,
+//   // cookie: { secure: true }
+//   "cookie": {
+//     "originalMaxAge": null,
+//     "expires": null,
+//     "httpOnly": true,
+//     "path": "/"
+//   }
+// }))
+
+
+
+// Session configuration with cookie settings
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    // domain: 'recipe-community-frontend.vercel.app', // Set the domain for the cookie
+    // path: '/',
+    // httpOnly: true, // Prevent access from JavaScript
+    // secure: true, // Ensures the cookie is only sent over HTTPS
+    // maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    // sameSite: 'Strict', // CSRF protection
+  }
+}));
 
 
  
@@ -81,10 +99,10 @@ app.use((req, res, next) => {
 
 
 
-// app.get('/', (req, res) => {
-//   console.log('Session:', req.session);
-//   res.send('Hello World!');
-// });
+app.get('/sd', (req, res) => {
+  // console.log('Session:', req.session);
+  res.send(req.session);
+});
 
 // Import and use routes
 const BlogRoutes = require("./Routes/BlogRoutes");
