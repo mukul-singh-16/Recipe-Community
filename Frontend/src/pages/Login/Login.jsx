@@ -19,7 +19,16 @@ const Login = () => {
 
   const googlelogin = async () => {
     try{
-      window.open(import.meta.env.VITE_SERVER_URL+"/google","_self")
+      const res = axios.get(import.meta.env.VITE_SERVER_URL+"/google")
+      .then((res)=>{
+        console.log(res.data);
+        // window.location.href=import.meta.env.VITE_CLIENT_URL;
+      })
+      .catch((e)=>{
+        console.log(e);
+
+      })
+
     // window.location.href=import.meta.env.VITE_CLIENT_URL;
     }
     catch(e)

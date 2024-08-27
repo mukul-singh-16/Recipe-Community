@@ -40,27 +40,19 @@ mongoose.connect(mongourl)
 //   saveUninitialized: true,
 //   maxAge: 24 * 60 * 60 * 100,
 //   // cookie: { secure: true }
-//   "cookie": {
-//     "originalMaxAge": null,
-//     "expires": null,
-//     "httpOnly": true,
-//     "path": "/"
-//   }
+  
 // }))
 
 
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: true,
-  cookie: {
-    domain: 'vercel.app', // Use the top-level domain
-    path: '/',
+  saveUninitialized: false, // Set to false in production
+  cookie: { 
+    secure: true, // Ensure HTTPS is used in production
     httpOnly: true,
-    secure: true, // Ensure secure flag is set for HTTPS
-    sameSite: 'None', // Allows cross-site cookies
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    sameSite: 'none' // Required if your site is using a different domain for frontend/backend
   }
 }));
 
@@ -103,8 +95,8 @@ app.use((req, res, next) => {
 
 
 app.get('/sd', (req, res) => {
-  // console.log('Session:', req.session);
-  res.send(req.session);
+  console.log('Session:', req.session);
+  res.send(req.sessionID);
 });
 
 // Import and use routes
