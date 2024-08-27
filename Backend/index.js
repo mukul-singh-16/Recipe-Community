@@ -37,17 +37,17 @@ mongoose.connect(mongourl)
 
 
 
-app.use(session({
-  store: MongoStore.create({ mongoUrl: mongourl, 
-    ttl: 24 * 60 * 60 // Session TTL in seconds (24 hours)
-     }),
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  maxAge: 24 * 60 * 60 * 100,
-  // cookie: { secure: true }
+// app.use(session({
+//   store: MongoStore.create({ mongoUrl: mongourl, 
+//     ttl: 24 * 60 * 60 // Session TTL in seconds (24 hours)
+//      }),
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   maxAge: 24 * 60 * 60 * 100,
+//   // cookie: { secure: true }
   
-}))
+// }))
 
 
 
