@@ -8,6 +8,11 @@ const { findById } = require('../Models/blogComment');
 
 
 
+router.get('/sd', (req, res) => {
+  console.log('Session:', req.session);
+  res.send(req.sessionID);
+});
+
 
 router.post("/follow/:userId", async (req, res) => {
   try {
