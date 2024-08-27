@@ -107,7 +107,7 @@ app.use((req, res, next) => {
 app.get('/set-cookie', (req, res) => {
   // Ensure session is set and cookie is sent
   req.session.user = { id: 123, name: 'Test User' };
-  res.cookie('test_cookie', 'test_value', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none' });
+  // res.cookie('test_cookie', 'test_value', { httpOnly: true, secure: true, sameSite: 'none' });
   res.send('Session and cookie set');
 });
 
