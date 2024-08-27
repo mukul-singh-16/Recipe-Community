@@ -61,7 +61,6 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: true, // Ensure HTTPS is used in production
-    httpOnly: true, // Prevent client-side access
     sameSite: 'none' // Allow cross-origin requests
   }
 }));
