@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     const fetchuserinfo = async () => {
         const response = await axios(import.meta.env.VITE_SERVER_URL+"/login/success", {
-          withCredentials: true, // Send cookies with the request
+          withCredentials: true, 
         });
 
         if(response.data.user)

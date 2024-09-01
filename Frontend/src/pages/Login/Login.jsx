@@ -118,7 +118,7 @@ const Login = () => {
     );
 
       console.log(res.data);
-      localStorage.setItem('connect.sid', JSON.stringify(res.data.sessionId));
+      // localStorage.setItem('connect.sid', JSON.stringify(res.data.sessionId));
       navigate('/')
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error } });
