@@ -176,7 +176,7 @@ router.post('/login', passport.authenticate('local',{  session: true
       // console.log("inside login routs  " + req.user);
       console.log("req.user in login")
       console.log(req.user)
-      res.cookie('siid', req.sessionID)
+      // res.cookie('siid', req.sessionID)
       return res.status(200).json({ message: 'Logged in successfully', user:req.user ,sessionId : `${req.sessionID}`});   
     }
     catch(e)

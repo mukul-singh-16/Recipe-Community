@@ -60,17 +60,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // secure: false, // Ensure HTTPS is used in production
-    // sameSite: 'none' // Allow cross-origin requests
+    secure: true, 
   }
 }));
-
-
-
-
-
-
- 
 
 
 
@@ -98,6 +90,8 @@ app.use(cors({
 // Example middleware for debugging or additional processing
 app.use((req, res, next) => {
   console.log("Request user:", req.user); 
+  
+  // res.cookie('siid', req.sessionID)
   next();
 });
 

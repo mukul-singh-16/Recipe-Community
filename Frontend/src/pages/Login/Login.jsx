@@ -98,6 +98,9 @@ const Login = () => {
 
     e.preventDefault();
 
+
+    // const sessionId = localStorage.getItem('_sid');
+
     const { username, password } = formData;
 
     try {
@@ -106,17 +109,17 @@ const Login = () => {
         password
       },{
         withCredentials: true
-      });
+      }
+      // ,{
+      //   headers: {
+      //     '_sid': `Bearer ${sessionId}` 
+      //   }
+      // }
+    );
 
       console.log(res.data);
-      localStorage.setItem('loginData', JSON.stringify(res.data));
-
-      // console.log(res.headers['set-cookie']);
-      // console.log('Response Headers:', res.headers);
-      
+      // localStorage.setItem('_sid', JSON.stringify(res.data.sessionId));
       navigate('/')
-     
-      
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error } });
 
