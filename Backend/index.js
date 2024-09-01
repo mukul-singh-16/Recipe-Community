@@ -60,8 +60,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true, // Ensure HTTPS is used in production
-    sameSite: 'none' // Allow cross-origin requests
+    // secure: false, // Ensure HTTPS is used in production
+    // sameSite: 'none' // Allow cross-origin requests
   }
 }));
 

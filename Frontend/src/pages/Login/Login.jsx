@@ -109,8 +109,10 @@ const Login = () => {
       });
 
       console.log(res.data);
-      console.log(res.headers['set-cookie']);
-      console.log('Response Headers:', res.headers);
+      localStorage.setItem('loginData', JSON.stringify(res.data));
+
+      // console.log(res.headers['set-cookie']);
+      // console.log('Response Headers:', res.headers);
       
       navigate('/')
      

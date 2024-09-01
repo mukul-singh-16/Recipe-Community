@@ -30,6 +30,7 @@ const App = () => {
 
         if(response.data.user)
         {
+          localStorage.setItem('userdata', JSON.stringify(response.data));
           setUser(response.data.user); 
         console.log(response.data);
         }
