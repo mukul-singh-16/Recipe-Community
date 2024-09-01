@@ -112,6 +112,11 @@ app.get('/sd', (req, res) => {
   res.send(req.sessionID);
 });
 
+
+app.get('/showcookies', (req, res) => {
+  // console.log('Session:', req.session);
+  res.send(req.session);
+});
 // Import and use routes
 const BlogRoutes = require("./Routes/BlogRoutes");
 const NormalRoutes = require("./Routes/NormalRoutes");
