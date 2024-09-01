@@ -54,14 +54,14 @@ mongoose.connect(mongourl)
 app.use(session({
   store: MongoStore.create({
     mongoUrl:mongourl,
-    ttl: 24 * 60 * 60 // Session TTL in seconds (24 hours)
+    ttl: 24 * 60 * 60 
   }),
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
   cookie: {
     secure: true, 
-    sameSite: 'None'
+    // sameSite: 'None'
   }
 }));
 
