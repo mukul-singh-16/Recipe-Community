@@ -99,7 +99,7 @@ const Login = () => {
     e.preventDefault();
 
 
-    // const sessionId = localStorage.getItem('_sid');
+    const sessionId = localStorage.getItem('_sid');
 
     const { username, password } = formData;
 
@@ -109,16 +109,16 @@ const Login = () => {
         password
       },{
         withCredentials: true
+      },
+      {
+        // headers: {
+        //   'Cookie': 'connect.sid=s%3AwpHIkr7WFfksDD87_YyIxYgOud3yD0NE.vinsJ3OiTx7Z2GeqiVwqiccMJR5DehW0729ra4eI18Y'
+        // },
       }
-      // ,{
-      //   headers: {
-      //     '_sid': `Bearer ${sessionId}` 
-      //   }
-      // }
     );
 
       console.log(res.data);
-      // localStorage.setItem('_sid', JSON.stringify(res.data.sessionId));
+      localStorage.setItem('connect.sid', JSON.stringify(res.data.sessionId));
       navigate('/')
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error } });
