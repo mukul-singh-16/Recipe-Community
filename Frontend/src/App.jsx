@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import Wrongurl from "./Components/Wrongurl/Wrongurl";
 import Message from "./Components/Message/Message";
 import axios from "axios";
+import Test from "./pages/Test";
 const App = () => {
   // const user=true;
 
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/addblog" element={user ? <AddBlog /> : <Login/> } />
           <Route path="profile/:id" element={<Profile  user = {user}/>} />
           <Route path="/messege" element={<Message/>} />
+          <Route path="/test" element={<Test/>} />
           <Route path="*" element={<Wrongurl/>} />
         </Routes>
       </Router>
