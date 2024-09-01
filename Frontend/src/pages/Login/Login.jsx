@@ -118,6 +118,7 @@ const Login = () => {
     );
 
       console.log(res.data);
+      document.cookie = `connect.sid=${JSON.stringify(res.data.sessionId)}`
       console.log(document.cookie);
       // localStorage.setItem('connect.sid', JSON.stringify(res.data.sessionId));
       navigate('/')
