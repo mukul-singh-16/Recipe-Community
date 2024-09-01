@@ -14,7 +14,7 @@ const MongoStore = require('connect-mongo');
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 
 // Connect to MongoDB

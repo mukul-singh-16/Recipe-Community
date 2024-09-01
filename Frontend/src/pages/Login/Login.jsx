@@ -110,17 +110,12 @@ const Login = () => {
       },{
         withCredentials: true
       },
-      {
-        // headers: {
-        //   'Cookie': 'connect.sid=s%3AwpHIkr7WFfksDD87_YyIxYgOud3yD0NE.vinsJ3OiTx7Z2GeqiVwqiccMJR5DehW0729ra4eI18Y'
-        // },
-      }
     );
 
-      console.log(res.data);
-      document.cookie = `connect.sid=${JSON.stringify(res.data.sessionId)}`
-      console.log(document.cookie);
-      // localStorage.setItem('connect.sid', JSON.stringify(res.data.sessionId));
+      // console.log(res.data);
+
+      // document.cookie = `connect.sid=${res.data.sessionId}`
+      console.log("all cookies",document.cookie);
       navigate('/')
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error } });

@@ -168,8 +168,7 @@ router.get("/follow/decline/:id", async (req, res) => {
 
 
 
-router.post('/login', passport.authenticate('local',{  session: true 
-}), 
+router.post('/login', passport.authenticate('local'), 
 (req, res) => {
   try
     {
