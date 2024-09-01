@@ -114,7 +114,7 @@ app.get('/sd', (req, res) => {
 
 
 app.get('/showcookies', (req, res) => {
-  // console.log('Session:', req.session);
+  console.log('Session:', req.session);
   res.send(req.session);
 });
 // Import and use routes
