@@ -109,7 +109,7 @@ const Login = () => {
         password
       },{
         withCredentials: true
-      },
+      }
     );
 
       // console.log(res.data);
