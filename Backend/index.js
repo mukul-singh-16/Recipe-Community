@@ -50,9 +50,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true, 
+    // secure: true, 
     sameSite: 'None',
-    httpOnly: false
+    // httpOnly: false
   }
 }));
 
@@ -91,6 +91,11 @@ app.use((req, res, next) => {
 
 app.get('/set-cookie', (req, res) => {
   req.session.user = { id: 123, name: 'Test User' };
+  // res.cookie('setcookies', '123445', {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === 'production', // Set to true in production
+  //   sameSite: 'None' // Required for cross-site cookies
+  // });
   res.send('Session and cookie set');
 });
 
