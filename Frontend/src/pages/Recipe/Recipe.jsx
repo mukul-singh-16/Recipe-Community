@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import MyNav from "../../Components/Navbar/MyNav";
 import Footer from "../../Components/footer/Footer";
 import MyCard from "../../Components/Cards/MyCard";
 import SearchForm from "../../Components/Search Bar/SearchForm";
 import axios from "axios";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { RecipeSearched } from "../../atom";
 
 const Recipe = () => {
   const navigate = useNavigate();
@@ -17,18 +18,29 @@ const Recipe = () => {
 
   const [recipes, setrecipe] = useState([]);
 
+
+  const searchedItem = useRecoilValue(RecipeSearched)
   async function getAllRecipes() {
     try {
-      const res = await axios.get(import.meta.env.VITE_SERVER_URL+"/recipe");
+      const res = await axios.get(import.meta.env.VITE_SERVER_URL+"/recipe",{
+        params: {
+          searcheddata: searchedItem
+        }
+      });
       setrecipe(res.data);
     } catch (e) {
       console.log("bhai recipe fetch nhi ho pa rhi url se");
     }
   }
 
+  // getAllRecipes();
+  
+
   useEffect(() => {
+
+    
     getAllRecipes();
-  }, []);
+  }, [searchedItem]);
 
   const flexbox = {
     display: "flex",
@@ -76,7 +88,7 @@ const Recipe = () => {
           margin: "20px",
         }}
       >
-        <SearchForm />
+        <SearchForm  searchfrom="RECIPE"/>
       </div>
 
       {recipes.length === 0 && (

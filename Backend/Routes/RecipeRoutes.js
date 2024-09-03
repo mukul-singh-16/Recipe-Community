@@ -6,8 +6,18 @@ const User = require("../Models/user");
 
 router.get("/recipe", async (req, res) => {
   try {
-    const recipe = await MyRecipe.find();
-    // console.log("sare recipes aa jynge");
+    let {searcheddata} =req.query;
+    // console.log(searcheddata)
+
+    const filter = searcheddata||"";
+
+    const recipe = await MyRecipe.find({
+      $or: [
+        { title: { "$regex": filter, "$options": "i" } }, 
+        { author: { "$regex": filter, "$options": "i" } } 
+      ]
+    })
+    
     res.status(200).json(recipe);
   } catch (e) {
     res.status(400).json({ msg: "Something Went Wrong!!!" });

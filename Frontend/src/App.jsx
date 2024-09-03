@@ -18,6 +18,7 @@ import Wrongurl from "./Components/Wrongurl/Wrongurl";
 import Message from "./Components/Message/Message";
 import axios from "axios";
 import Test from "./pages/Test";
+import { RecoilRoot } from "recoil";
 const App = () => {
   // const user=true;
 
@@ -44,7 +45,7 @@ const App = () => {
     
   }, []);
   return (
-    <>
+    <RecoilRoot>
       <Router>
         <MyNav user={user} />
         <Routes>
@@ -53,12 +54,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route
             path="/showRecipe/:id"
-            element={user ? <ShowRecipe /> : <Login />}
+            element={<ShowRecipe /> }
           />
           <Route path="/blogs" element={<MyBlogs />} />
           <Route
             path="/showBlogs/:id"
-            element={user ? <ShowBlogs /> : <Login />}
+            element={<ShowBlogs />}
           />
           <Route path="/contact" element={<Contact />} />
           <Route path="/addrecipe" element={user ?<AddRecipe /> :<Login/>} />
@@ -69,7 +70,7 @@ const App = () => {
           <Route path="*" element={<Wrongurl/>} />
         </Routes>
       </Router>
-    </>
+    </RecoilRoot>
   );
 };
 

@@ -113,10 +113,10 @@ const Login = () => {
     );
 
       // console.log(res.data);
-
+      window.location.href=import.meta.env.VITE_CLIENT_URL;
       // document.cookie = `connect.sid=${res.data.sessionId}`
-      console.log("all cookies",document.cookie);
-      navigate('/')
+      // console.log("all cookies",document.cookie);
+      // navigate('/')
     } catch (error) {
       navigate('/messege', { state: { message: "Login failed: " + error } });
 

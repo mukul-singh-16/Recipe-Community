@@ -9,29 +9,44 @@ import BCard from "../../Components/Cards/BCard";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { BlogSearched } from "../../atom";
 
 export const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
+  const searchedItem = useRecoilValue(BlogSearched)
 
   function Redirect() {
     navigate("/addblog");
   }
 
-  async function getAllBlogs() {
-    try {
-      console.log(import.meta.env.VITE_SERVER_URL+"/blog");
-      const res = await axios.get(import.meta.env.VITE_SERVER_URL+"/blog");
-      console.log(res.data);
-      setBlogs(res.data);
-    } catch (e) {
-      console.log("unable to fetch all blogs data");
-    }
-  }
+  
 
   useEffect(() => {
+
+    async function getAllBlogs() {
+      try {
+        // console.log(import.meta.env.VITE_SERVER_URL+"/blog");
+        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/blog`, {
+          params: {
+            searcheddata: searchedItem
+          }
+        });
+        // console.log(res.data);
+  
+        setBlogs(res.data);
+      } catch (e) {
+        console.log("unable to fetch all blogs data");
+      }
+    }
+
+
+
     getAllBlogs();
-  }, []);
+  }, [searchedItem]);
+
+
 
   const flexbox = {
     display: "flex",
@@ -73,9 +88,7 @@ export const MyBlogs = () => {
         <h1>Explore's The Blogs</h1>
       </div>
       
-      {blogs.length === 0 && (
-        <h2 style={{textAlign:"center"}}>Loading...</h2>
-      )}
+      
 
       <div
         style={{
@@ -85,7 +98,14 @@ export const MyBlogs = () => {
           margin: "20px",
         }}
       >
-        <SearchForm />
+        <SearchForm  searchfrom="BLOG"/>
+        
+
+
+
+        {blogs.length === 0 && (
+        <h2 style={{textAlign:"center"}}>Loading...</h2>
+      )}
       </div>
       
       <div className="container" style={flexbox}>

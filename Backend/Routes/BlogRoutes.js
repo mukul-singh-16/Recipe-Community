@@ -9,7 +9,26 @@ const User = require("../Models/user")
 
 router.get("/blog", async (req, res) => {
   try {
-    const blog = await MyBlog.find();
+
+
+    let {searcheddata} =req.query;
+
+
+    // console.log("blogs finder")
+    // console.log(searcheddata)
+
+
+
+    const filter = searcheddata||"";
+
+
+    const blog = await MyBlog.find({
+      $or: [
+        { title: { "$regex": filter, "$options": "i" } }, 
+        { author: { "$regex": filter, "$options": "i" } } 
+      ]
+    });
+    // const blog = await MyBlog.find();
     // console.log("sare blogs aa jynge");
     res.status(200).json(blog);
   } catch (e) {
