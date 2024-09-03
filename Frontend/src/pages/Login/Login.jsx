@@ -18,24 +18,8 @@ const Login = () => {
   });
 
   const googlelogin = async () => {
-    try{
-      const res = axios.get(import.meta.env.VITE_SERVER_URL+"/google")
-      .then((res)=>{
-        console.log(res.data);
-        // window.location.href=import.meta.env.VITE_CLIENT_URL;
-      })
-      .catch((e)=>{
-        console.log(e);
-
-      })
-
-    // window.location.href=import.meta.env.VITE_CLIENT_URL;
-    }
-    catch(e)
-    {
-        navigate('/messege', { state: { message: "Login failed: " + e.message } }); 
-    }
-      
+    // console.log(import.meta.env.VITE_SERVER_URL+"/google")
+      window.open(import.meta.env.VITE_SERVER_URL+"/google","_self");
   };
 
 

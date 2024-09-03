@@ -75,10 +75,22 @@ passport.use(
 //   )
 // );
 
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
+
+// passport.deserializeUser((user, done) => {
+//   done(null, user);
+// });
+
+
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+// This function retrieves the user details from the session using the ID
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+      done(err, user);
+  });
 });

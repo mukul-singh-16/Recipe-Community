@@ -8,10 +8,10 @@ const { findById } = require('../Models/blogComment');
 
 
 
-router.get('/sd', (req, res) => {
-  console.log('Session:', req.session);
-  res.send(req.sessionID);
-});
+// router.get('/sd', (req, res) => {
+//   console.log('Session:', req.session);
+//   res.send(req.sessionID);
+// });
 
 
 router.post("/follow/:userId", async (req, res) => {
@@ -175,8 +175,7 @@ router.post('/login', passport.authenticate('local'),
       // console.log("inside login routs  " + req.user);
       console.log("req.user in login")
       console.log(req.user)
-      // res.cookie('siid', req.sessionID)
-      return res.status(200).json({ message: 'Logged in successfully', user:req.user ,sessionId : `${req.sessionID}`});   
+      return res.status(200).json({ message: 'Logged in successfully', user:req.user });   
     }
     catch(e)
     {
@@ -268,19 +267,31 @@ router.get("/logout", (req, res) => {
 
 
 
-router.get("/google", passport.authenticate("google", { scope: ["email", "profile"] }));
+router.get("/google", passport.authenticate("google", { scope: ["email","profile"] }));
 
-router.get(
-    "/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login/failed" }),
-    (req, res) => {
-        const userInfo = req.user;
-        const sessionID = req.sessionID;
+// router.get("/google/callback", passport.authenticate("google"),(req,res)=>{
+//   console.log("done")
+//   res.redirect(process.env.CLIENT_URL);
+// }
+// );
 
-        // Redirecting back to the frontend with session ID and user info
-        res.redirect(`${process.env.CLIENT_URL}/auth/success?sessionID=${sessionID}&user=${encodeURIComponent(JSON.stringify(userInfo))}`);
-    }
-);
+
+
+router.get("/google/callback", passport.authenticate("google"), (req, res) => {
+  if (!req.user) {
+      console.log("User is undefined after authentication");
+      return res.redirect(process.env.CLIENT_URL+"/login"); // Redirect to login if authentication fails
+  }
+
+  console.log("User authenticated successfully:", req.user);
+  res.redirect(process.env.CLIENT_URL);
+});
+
+
+// router.get('/google/callback', (req, res) => {
+//   res.send('Google callback route is working!');
+// });
+
 
 
 

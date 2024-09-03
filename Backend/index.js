@@ -118,10 +118,11 @@ const NormalRoutes = require("./Routes/NormalRoutes");
 const RecipeRoutes = require("./Routes/RecipeRoutes");
 const UserRoutes = require("./Routes/UserRoutes");
 
+app.use(UserRoutes);
 app.use(BlogRoutes);
 app.use(NormalRoutes);
 app.use(RecipeRoutes);
-app.use(UserRoutes);
+
 
 // Start server
 app.listen(port, () => {
