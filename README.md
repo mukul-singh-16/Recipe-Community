@@ -14,7 +14,7 @@ FlavourVerse is a full-stack web application built with the MERN stack (MongoDB,
 
 ## Project Link
 
-Check out the project [here](https://github.com/mukul-singh-16/Recipe-Community).
+Check out the project [here](https://recipe-community-frontend.vercel.app/).
 
 ## Screenshots
 
