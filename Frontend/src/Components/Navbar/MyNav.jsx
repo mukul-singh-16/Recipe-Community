@@ -22,7 +22,7 @@ function MyNav(props) {
 
   const requestAcceptHAndler = async (user)=>{
     try{
-    await axios.get(import.meta.env.VITE_SERVER_URL+`/auth/follow/accept/${user._id}`,{
+    await axios.get(import.meta.env.VITE_SERVER_URL+`/follow/accept/${user._id}`,{
       withCredentials: true,
       headers: {
         Accept: 'application/json',
@@ -40,7 +40,7 @@ function MyNav(props) {
 
   const requestdeclineHandler = async(user)=>{
     try{
-        await axios.get(import.meta.env.VITE_SERVER_URL+`/auth/follow/decline/${user._id}`,{
+        await axios.get(import.meta.env.VITE_SERVER_URL+`/follow/decline/${user._id}`,{
         withCredentials: true,
         headers: {
           Accept: 'application/json',
@@ -61,7 +61,7 @@ function MyNav(props) {
     const fetchRequestedUser = async () => {
       try {
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_URL+"/auth/requesteduser",
+          import.meta.env.VITE_SERVER_URL+"/requesteduser",
           {
             withCredentials: true,
             headers: {
