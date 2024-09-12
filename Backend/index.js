@@ -50,8 +50,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true,  // Cookie will only be sent over HTTPS
-    sameSite: 'None',  // Allows cross-site cookies
+    // secure: true,  // Cookie will only be sent over HTTPS
+    // sameSite: 'None',  // Allows cross-site cookies
     httpOnly: false,  // Cookie cannot be accessed via JavaScript
   },
   proxy: true  // Trust the `X-Forwarded-*` headers set by the reverse proxy

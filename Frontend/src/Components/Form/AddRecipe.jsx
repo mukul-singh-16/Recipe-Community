@@ -34,7 +34,7 @@ const AddRecipe = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/recipe/add", formData, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/recipe/add`, formData, {
       withCredentials: true,
       headers: {
         Accept: "application/json",

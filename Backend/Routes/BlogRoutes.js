@@ -39,6 +39,8 @@ router.get("/blog", async (req, res) => {
 router.post("/blog/add", async (req, res) => {
   try {
     // console.log("Current user id:", req.user._id);
+
+    
     const userid = req.user._id;
     const currentUser = await User.findById(req.user._id);
 

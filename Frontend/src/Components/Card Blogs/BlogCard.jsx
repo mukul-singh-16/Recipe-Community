@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./BlogCard.module.css";
 const BlogCard = () => {
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <div class={styles.card}>
       <div class={styles.cardContent}>
         <h2 class={styles.cardTitle}>Animated Card</h2>
