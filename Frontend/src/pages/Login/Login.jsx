@@ -111,6 +111,39 @@ const Login = () => {
     }
   };
 
+
+
+  const loginwithmukul = async (e) => {
+
+    e.preventDefault();
+
+
+    // const sessionId = localStorage.getItem('_sid');
+
+    // const { username, password } = formData;
+
+    try {
+      const res = await axios.post(import.meta.env.VITE_SERVER_URL+"/login", {
+        username:"mukul",
+        password:"1234"
+      },{
+        withCredentials: true
+      }
+    );
+
+      window.location.href=import.meta.env.VITE_CLIENT_URL;
+      
+    } catch (error) {
+      navigate('/messege', { state: { message: "Login failed: " + error } });
+
+
+      console.error("Error:", error);
+
+      console.error("Login failed.");
+    }
+  };
+
+
   return (
     <>
       <div className={styles.container} style={{ marginTop: "20px" }}>
@@ -148,9 +181,8 @@ const Login = () => {
                     onClick={togglePasswordVisibility}
                   ></i>
                 </div>
-                <div className={styles.checkboxText}>
+                {/* <div className={styles.checkboxText}>
                   <div className={styles.checkboxContent}>
-                    {/* <input type="checkbox" id="logCheck" /> */}
                     <label htmlFor="logCheck" className={styles.text}>
                       Sign in with Google
                     </label>
@@ -158,13 +190,16 @@ const Login = () => {
                   <a onClick={googlelogin} className={styles.text}>
                     <FcGoogle className="googleicon" style={{ fontSize: "30px" }} />
                   </a>
-                </div>
-                <div className={styles.inputField}>
-                  <button type="submit">Login</button>
-                </div>
-
+                </div> */}
                 
+                <div className={styles.inputField}>
+                  <button type="submit">login </button>
+                </div>              
               </form>
+              <div className={styles.inputField} onClick={loginwithmukul}>
+                  <button type="submit">login as mukul</button>
+                </div> 
+              
               <div className={styles.loginSignup}>
                 <span className={styles.text}>
                   Not a member?{" "}

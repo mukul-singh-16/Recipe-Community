@@ -12,6 +12,8 @@ const Home = (props) => {
       <MyCarousels />
       <HCard />
       <Footer />
+      
+
     </>
   );
 };
